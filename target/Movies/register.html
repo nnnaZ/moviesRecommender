@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/register.css">
+
+    <script src="js/jquery-3.5.1.js"></script>
+
+    <script>
+       function register_button() {
+            var userId = $(".userId").val();
+            var password = $(".password").val();
+
+            if(userId == "" || password == ""){
+                alert("账号或者密码不能为空！！");
+            }else {
+                $.post("user/register",{userId:userId,password:password},function (data) {
+                    if(data.flag == true){
+                        alert(data.message);
+                        window.location.href = 'index.html';
+                    }else {
+                        alert("账号重复，请重新设置");
+                        $(".userId").val("");
+                        $(".password").val("");
+                    }
+                });
+            }
+        }
+    </script>
+
+</head>
+<body>
+<div class="register-div">
+    <div class="register-p">注册页面</div>
+    <div class="register-input-text">
+        账号：<input class="userId" type="text" placeholder="  请输入数字(十一位以内)"><br>
+        密码：<input class="password" type="text" placeholder="  请设置密码"><br>
+    </div>
+    <div class="register-button-div">
+        <button class="register-button" type="button" onclick="register_button()">注册</button>
+    </div>
+</div>
+
+</body>
+</html>

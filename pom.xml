@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>Movies</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>Movies Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+  <!--    单元测试用的-->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        <scope>test</scope>
+      </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.3</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.17</version>
+      </dependency>
+
+<!--    mahout配置-->
+    <!-- https://mvnrepository.com/artifact/org.apache.mahout/mahout-core -->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.mahout</groupId>-->
+<!--      <artifactId>mahout-core</artifactId>-->
+<!--      <version>0.9</version>-->
+<!--    </dependency>-->
+<!--    &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.mahout/mahout-integration &ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.mahout</groupId>-->
+<!--      <artifactId>mahout-integration</artifactId>-->
+<!--      <version>0.9</version>-->
+<!--      <exclusions>-->
+<!--        <exclusion>-->
+<!--          <groupId>org.mortbay.jetty</groupId>-->
+<!--          <artifactId>jetty</artifactId>-->
+<!--        </exclusion>-->
+<!--        <exclusion>-->
+<!--          <groupId>org.apache.cassandra</groupId>-->
+<!--          <artifactId>cassandra-all</artifactId>-->
+<!--        </exclusion>-->
+<!--        <exclusion>-->
+<!--          <groupId>me.prettyprint</groupId>-->
+<!--          <artifactId>hector-core</artifactId>-->
+<!--        </exclusion>-->
+<!--      </exclusions>-->
+<!--    </dependency>-->
+
+
+    <!--    spring框架  -release表示稳定版  加载springmvc，会自动将spring核心框架也加载进去-->
+      <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc  -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>5.2.6.RELEASE</version>
+      </dependency>
+
+<!--    mysql驱动-->
+      <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.18</version>
+      </dependency>
+
+<!--    spring-jdbc  连接数据库-->
+      <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>5.2.6.RELEASE</version>
+      </dependency>
+
+<!--    Druid连接池  池里面放着连接数据库资源-->
+      <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>1.1.24</version>
+      </dependency>
+
+<!--    mybatis -->
+    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+<!--    <dependency>-->
+<!--      <groupId>org.mybatis</groupId>-->
+<!--      <artifactId>mybatis</artifactId>-->
+<!--      <version>3.5.5</version>-->
+<!--    </dependency>-->
+
+<!--    整合spring和mybatis-->
+    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+<!--    <dependency>-->
+<!--      <groupId>org.mybatis</groupId>-->
+<!--      <artifactId>mybatis-spring</artifactId>-->
+<!--      <version>2.0.5</version>-->
+<!--    </dependency>-->
+
+<!--    servlet-->
+      <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>4.0.0</version>
+        <scope>provided</scope>
+      </dependency>
+
+<!--    序列化-->
+    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.75</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+<!--      <dependency>-->
+<!--        <groupId>com.alibaba</groupId>-->
+<!--        <artifactId>fastjson</artifactId>-->
+<!--        <version>1.2.75</version>-->
+<!--      </dependency>-->
+
+<!--    读取csv文件-->
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-csv</artifactId>
+      <version>1.8</version>
+    </dependency>
+
+<!--    图片加载-->
+    <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+      <version>1.12.2</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.7</version>
+    </dependency>
+
+
+
+
+  </dependencies>
+
+  <build>
+    <finalName>Movies</finalName>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+
+<!--        <plugin>-->
+<!--          <groupId>org.apache.tomcat.maven</groupId>-->
+<!--          &lt;!&ndash; tomcat7的插件， 不同tomcat版本这个也不一样 &ndash;&gt;-->
+<!--          <artifactId>tomcat7-maven-plugin</artifactId>-->
+<!--          <version>2.2</version>-->
+<!--          <configuration>-->
+<!--            &lt;!&ndash; 项目访问路径  本例：localhost:9090,  如果配置的aa， 则访问路径为localhost:9090/aa&ndash;&gt;-->
+<!--            <path>/</path>-->
+<!--            &lt;!&ndash; 通过maven tomcat7:run运行项目时，访问项目的端口号 &ndash;&gt;-->
+<!--            <port>8080</port>-->
+<!--          </configuration>-->
+<!--        </plugin>-->
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

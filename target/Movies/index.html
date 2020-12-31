@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>电影推荐系统</title>
+
+
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/getParameter.js"></script>
+
+    <script>
+        $(function () {
+            //加载头部
+            $("#top").load("header.html");
+
+            var searchText = getParameter("searchText");
+            if(searchText != null && searchText != ""){
+                loadMoviesAndPageNumber(1,null,searchText);
+            }else{
+                //加载电影分类
+                var genres = getParameter("genres");
+                loadClassification(genres);
+            }
+
+
+        })
+
+        //搜索搜索框中的查询结果 分类的土拍你结果查询  全部图片结果查询
+        function loadMoviesAndPageNumber(pid, genres, searchText) {
+            $.post("movies/moviesAndPageNumber", {pid: pid, genres: genres,searchText:searchText}, function (data) {
+                // 数据格式：{data.currentPge当前页,data.totalPageNums总页数,data.list当前页的电影信息}
+                //图片 186*268
+                var picDiv = '<div class="movies-inf-one">';
+                for (var i = 0; i < data.list.length; i++) {
+                    picDiv += '<span><img src="image/' + data.list[i].pictureUrl + '.png" onclick="javascript:location.href=\'movie.html?moviesId='+data.list[i].moviesId+'\'">' + data.list[i].title + '</span>';
+                    if (i == 4) picDiv += '</div><div class="movies-inf-two">';
+                    if (i == 9) picDiv += '</div><div class="movies-inf-three">';
+                    if (i == 14) picDiv += '</div><div class="movies-inf-four">';
+                }
+                picDiv += '</div>';
+                $("#middle-pictures").html(picDiv);
+                // var moviesIdn = data.list[data.list.length-1].moviesId;
+
+                //页码
+                var pageDiv = '<ul>';
+                var totalPages = Math.ceil(data.totalPageNums / 20);
+                // var firP = '<li><a href="javascript:loadMoviesAndPageNumber(1, '+genres+', '+searchText+')">第一页</a></li>';
+                var firP = '<li><a href="javascript:loadMoviesAndPageNumber(1, \''+genres+'\', \''+searchText+'\')">第一页</a></li>';
+                var preId;
+                if(pid == 1){
+                    preId = 1;
+                }else {
+                    preId = pid-1;
+                }
+
+                // var preP = '<li><a href="javascript:loadMoviesAndPageNumber('+preId+', '+genres+', '+searchText+')">上一页</a></li>';
+                var preP = '<li><a href="javascript:loadMoviesAndPageNumber('+preId+', \''+genres+'\', \''+searchText+'\')">上一页</a></li>';
+                var curP = '<li>第'+pid+'页，共'+totalPages+'页</li>';
+                var nexId;
+                if(pid == totalPages){
+                    nexId = totalPages;
+                }else{
+                    nexId = pid +1;
+                }
+                // var nexP = '<li><a href="javascript:loadMoviesAndPageNumber('+nexId+','+genres+','+searchText+')">下一页</a></li>'
+                var nexP = '<li><a href="javascript:loadMoviesAndPageNumber('+nexId+',\''+genres+'\', \''+searchText+'\')">下一页</a></li>'
+                // var endP = '<li><a href="javascript:loadMoviesAndPageNumber('+totalPages+', '+genres+','+searchText+')">最后一页</a></li>';
+                var endP = '<li><a href="javascript:loadMoviesAndPageNumber('+totalPages+', \''+genres+'\', \''+searchText+'\')">最后一页</a></li>';
+                pageDiv += firP;
+                pageDiv += preP;
+                pageDiv += curP;
+                pageDiv += nexP;
+                pageDiv += endP;
+                $("#pageNumber").html(pageDiv);
+
+                if(searchText != null && searchText != "null"){
+                    $(".in-search").val(searchText);
+                }
+
+                //定位到页面顶部
+                window.scrollTo(0,0);
+            });
+        }
+
+        function loadClassification(genres) {
+            $.post("movies/classify", {}, function (data) {
+                $(".middle-span").html("电影分类");
+                var lis = '<div id="middle-sort-up" class="middle-sort-up">';
+                for (var i = 0; i < data.length; i++) {
+                    if (genres == data[i]) {
+                        if(i == 5 || i==9 || i== 15 | i==19){
+                            if( i == 5 || i == 15){
+                                lis += ' <li style="width: 110px;"><a href="index.html?genres='+data[i]+'" style="color: brown">'+data[i]+'</a></li>';
+                            }else{
+                                lis += ' <li style="width: 130px;"><a href="index.html?genres='+data[i]+'" style="color: brown">'+data[i]+'</a></li>';
+                            }
+                        }else {
+                            lis += ' <li><a href="index.html?genres='+data[i]+'" style="color: brown">'+data[i]+'</a></li>';
+                        }
+                    } else {
+                        if(i == 5 || i==9 || i== 15 | i==19){
+                            if( i == 5 || i == 15){
+                                lis += ' <li style="width: 110px;"><a href="index.html?genres='+data[i]+'">'+data[i]+'</a></li>';
+                            }else{
+                                lis += ' <li style="width: 130px;"><a href="index.html?genres='+data[i]+'">'+data[i]+'</a></li>';
+                            }
+                        }else {
+                            lis += ' <li><a href="index.html?genres='+data[i]+'">'+data[i]+'</a></li>';
+                        }
+                    }
+
+                    if(i == 9){
+                        lis += '</div><div id="middle-sort-down" class="middle-sort-down">';
+                    }
+                }
+                lis += '</div>';
+                $("#middle-sort-u").html(lis);
+
+            });
+
+            // var searchText = $(".in-search").val();
+            //自动加载第一页
+            loadMoviesAndPageNumber(1, genres,null);
+        }
+
+    </script>
+
+</head>
+<body>
+<div id="top" class="top"></div>
+<div class="middle">
+    <div id="middle-classify" class="middle-sort">
+        <span class="middle-span"></span>
+        <ul id="middle-sort-u" class="middle-sort-u">
+<!--            <div id="middle-sort-up" class="middle-sort-up">-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--            </div>-->
+<!--            <div id="middle-sort-down" class="middle-sort-down">-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--                <li><a href="#">Drama</a></li>-->
+<!--            </div>-->
+        </ul>
+    </div>
+
+    <div id="middle-pictures" class="middle-pictures">
+        <div class="movies-inf-one">
+            放电影图片
+            <span><img src="">1111111111111111111111111111111111111</span>
+            <span><img src="">2</span>
+            <span><img src="">3</span>
+            <span><img src="">4</span>
+            <span><img src="">5</span>
+        </div>
+        <div class="movies-inf-two">
+            放电影图片
+            <span><img src="">1</span>
+            <span><img src="">2</span>
+            <span><img src="">3</span>
+            <span><img src="">4</span>
+            <span><img src="">5</span>
+        </div>
+        <div class="movies-inf-three">
+            放电影图片
+            <span><img src="">1</span>
+            <span><img src="">2</span>
+            <span><img src="">3</span>
+            <span><img src="">4</span>
+            <span><img src="">5</span>
+        </div>
+        <div class="movies-inf-four">
+            放电影图片
+            <span><img src="">1</span>
+            <span><img src="">2</span>
+            <span><img src="">3</span>
+            <span><img src="">4</span>
+            <span><img src="">5</span>
+        </div>
+    </div>
+    <div id="pageNumber" class="pageNumber">
+<!--        放页码 一页放20个电影-->
+        <ul>
+            <li><a href="#">第一页</a></li>
+            <li><a href="#">上一页</a></li>
+            <li>
+                第几页，共多少页
+            </li>
+            <li><a href="#">下一页</a></li>
+            <li><a href="#">最后一页</a></li>
+        </ul>
+    </div>
+
+</div>
+<!--<div class="footer">-->
+<!--    footer-->
+<!--</div>-->
+</body>
+</html>

@@ -1,0 +1,37 @@
+.register-div{
+    margin-top: 100px;
+    margin-left: 300px;
+    width: 500px;
+    height: 800px;
+
+}
+
+.register-p{
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 28px;
+    color: #2E2D3C;
+}
+
+.register-input-text{
+    margin-left: 100px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #4E5465;
+}
+
+.register-input-text .userId,.password{
+    margin-bottom: 8px;
+    width: 200px;
+    height: 30px;
+}
+
+.register-button-div{
+    margin-left: 200px;
+}
+
+.register-button{
+    width: 80px;
+    height: 30px;
+    background-color: #2F4056;
+}

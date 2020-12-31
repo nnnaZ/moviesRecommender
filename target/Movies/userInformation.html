@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户页面</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/userInformation.css">
+    <link rel="stylesheet" type="text/css" href="statics/layui/css/layui.css">
+
+    <script src="js/getParameter.js"></script>
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/userInformation.js"></script>
+    <script src="statics/layui/layui.js"></script>
+
+<!--    <script type="text/html" id="toolbarDemo">-->
+<!--        <div class="layui-btn-container">-->
+<!--            <button class="layui-btn layui-btn-sm" lay-event="delCheckData">删除选中行数据</button>-->
+<!--        </div>-->
+<!--    </script>-->
+
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+
+    <script>
+        $(function () {
+            $("#top").load("header.html");
+            myTagsAndRatings();
+        })
+
+        layui.use('table', function(){
+            var table = layui.table;
+            // table.render({
+            //     elem: '#tagAndRatingTable'
+            //     ,url:'movies/movieDetailRatingAndTagTable?moviesId=0&userId='+userId
+            //     ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            //     ,defaultToolbar: []
+            //     ,title: '用户数据表'
+            //     ,cols: [[
+            //         {type: 'checkbox', fixed: 'left'}
+            //         ,{field:'title', title:'电影', width:120, edit: 'text'}
+            //         ,{field:'tag', title:'评论', width:80, edit: 'text', sort: true}
+            //         ,{field:'rating', title:'评分', width:100, sort: true}
+            //         ,{field:'date', title:'时间', width:120}
+            //         ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+            //     ]]
+            //     ,page: false
+            // });
+
+            //表格头工具栏事件
+            // table.on('toolbar(test)', function(obj){
+            //     var checkStatus = table.checkStatus(obj.config.id);
+            //     if(obj.event == 'delCheckData'){
+            //         var dataRows = checkStatus.data;//获取选中行数据
+            //         var dataRows_json = JSON.stringify(dataRows);
+            //         //dateRows数组 每个元素数据格式：date: "2015-10-25 03:35:40"  moviesId: 80489 rating: 4.5 tag: "Boxing story" title: "Town, The (2010)" userId: 2
+            //         //将获取到的选中行数据传到后台
+            //         $.post("movies/movieDetailRatingAndTagTableDel",{dataRows_json:dataRows_json},function () {
+            //             obj.del();
+            //         });
+            //     }
+            // });
+
+            //表格监听行工具事件
+            table.on('tool(test)', function(obj){
+                //data 数据格式  date: "2015-10-25 03:33:27" moviesId: 89774 rating: 0 tag: "Boxing story" title: "Warrior (2011)"userId: 2
+                var data = obj.data;
+                //console.log(obj)
+                if(obj.event === 'del'){
+                    layer.confirm('真的删除行么', function(index){
+                        var dataRows_json = JSON.stringify(data);
+                        $.post("movies/movieDetailRatingAndTagTableDel",{dataRows_json:dataRows_json},function () {
+                            obj.del();
+                            layer.close(index);
+                        });
+                    });
+                } else if(obj.event === 'edit'){
+                    //时间戳  秒为单位
+                    var time_s =  Date.now();
+                    var time = parseInt(time_s /1000);//取整
+                    //日期格式
+                    var time_1 = new Date(time_s);
+                    var y = time_1.getFullYear();
+                    var m = time_1.getMonth()+1;
+                    var d = time_1.getDate();
+                    var h = time_1.getHours();
+                    var mm = time_1.getMinutes();
+                    var s = time_1.getSeconds();
+                    var date_n = y+'-'+timeAdd0(m)+'-'+timeAdd0(d)+' '+timeAdd0(h)+':'+timeAdd0(mm)+':'+timeAdd0(s);
+
+                    layer.prompt({
+                        formType: 2
+                        ,title: '评论'
+                        ,value: data.tag
+                    }, function(value, index){
+                        data.tag = value;
+                        obj.update({
+                            tag: value
+                        });
+                        var data1 = data;
+                        data1.rating = 0;
+                        var data_json = JSON.stringify(data1);
+                        $.post("movies/movieDetailRatingAndTagTableUpdate",{data_json:data_json,time:time},function () {
+                            obj.update({
+                                date:date_n
+                            });
+                        })
+                        layer.close(index);
+                    });
+                    layer.prompt({
+                        formType: 3
+                        ,title: '评分'
+                        ,value: data.rating
+                    }, function(value, index){
+                        data.rating = value;
+                        obj.update({
+                            rating: value
+                        });
+                        var data2 = data;
+                        data2.tag = null;
+                        var data_json = JSON.stringify(data2);
+                        $.post("movies/movieDetailRatingAndTagTableUpdate",{data_json:data_json,time:time},function () {
+
+                        })
+                        layer.close(index);
+                    });
+
+
+                    // obj.update({
+                    //     date: date_n
+                    // });
+                }
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+<div id="top" class="top"></div>
+<div class="middle">
+    <div class="middle-buttons">
+        <button class="middle-button-password" onclick="userAndPasswordText()">修改密码</button>
+        <button class="middle-button-tagAndRating" onclick="myTagsAndRatings()">我的评分和评论</button>
+    </div>
+    <div id="middle-text" class="middle-text">
+<!--        <table border="1">-->
+<!--            <tr>-->
+<!--                <th>电影</th>-->
+<!--                <th>评论</th>-->
+<!--                <th>评分</th>-->
+<!--                <th>时间</th>-->
+<!--                <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>January</td>-->
+<!--                <td>$100</td>-->
+<!--                <td>11</td>-->
+<!--                <td>1234567890</td>-->
+<!--                <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>-->
+<!--            </tr>-->
+<!--        </table>-->
+        <!--        <input id="password" name="password" type="password" placeholder="  用户更改密码"><br>-->
+        <!--        <button id="update-button" class="update-button" onclick="updatePassword()">更改</button>-->
+
+<!--        <table class="layui-hide" id="tagAndRatingTable" lay-filter="test"></table>-->
+
+
+    </div>
+</div>
+</body>
+</html>

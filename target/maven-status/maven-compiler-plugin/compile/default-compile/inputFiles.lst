@@ -1,0 +1,12 @@
+D:\Java\IdeaProjects\Movies\src\main\java\MoviesServer\servlet\BaseServlet.java
+D:\Java\IdeaProjects\Movies\src\main\java\MoviesServer\service\UserService.java
+D:\Java\IdeaProjects\Movies\src\main\java\DataLoader\LoadDataMain.java
+D:\Java\IdeaProjects\Movies\src\main\java\MoviesServer\servlet\UserServlet.java
+D:\Java\IdeaProjects\Movies\src\main\java\MoviesServer\entity\Movie.java
+D:\Java\IdeaProjects\Movies\src\main\java\MoviesServer\entity\User.java
+D:\Java\IdeaProjects\Movies\src\main\java\MoviesServer\utils\JDBCUtils.java
+D:\Java\IdeaProjects\Movies\src\main\java\DataLoader\BasicsLoadData.java
+D:\Java\IdeaProjects\Movies\src\main\java\MoviesServer\dao\impl\UserDaoImpl.java
+D:\Java\IdeaProjects\Movies\src\main\java\MoviesServer\service\impl\UserServiceImpl.java
+D:\Java\IdeaProjects\Movies\src\main\java\MoviesServer\dao\UserDao.java
+D:\Java\IdeaProjects\Movies\src\main\java\MoviesServer\entity\ResultInfo.java

@@ -1,0 +1,21 @@
+.footer-itemCFRecommender-p{
+    font-size: 20px;
+    color: #2F4056;
+}
+
+.footer-itemCFRecommender span{
+    display: inline-block;
+    margin-right: 16px;
+    width: 186px;
+    height: 300px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;/* ... */
+}
+
+.footer-itemCFRecommender span img{
+    width: 186px;
+    height: 268px;
+    /*background-color: #4E5465;*/
+}
+

@@ -1,0 +1,12 @@
+.middle div{
+    height: 300px;
+    margin-top: 10px;
+    margin-left: 500px;
+
+}
+
+.middle img{
+    width: 186px;
+    height: 268px;
+    /*background-color: darkslategray;*/
+}

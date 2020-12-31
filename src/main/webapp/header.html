@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<!--    <title>Title</title>-->
+
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/getParameter.js"></script>
+    <script src="js/header.js"></script>
+<!--    <script src="js/loadMoviesAndPageNumber.js"></script>-->
+
+    <script>
+        $(function () {
+            userSession();
+        })
+
+        $(".in-search-submit").click(function (){
+            var searchText = $(".in-search").val();
+            location.href='index.html?searchText='+searchText;
+        });
+    </script>
+
+</head>
+<body>
+
+    <ul id="nav-list" class="nav-list">
+        <li class="nav-index"><a href="index.html">电影推荐系统</a></li>
+        <li><a href="moviesTopN.html?recommender=num">热门推荐</a></li>
+        <li><a href="moviesTopN.html?recommender=avg">经典推荐</a></li>
+<!--        <li><a href="#">实时</a></li>-->
+    </ul>
+    <ul class="nav-search">
+        <input type="search" class="in-search" placeholder="请输入电影名">
+        <input type="submit" class="in-search-submit" value="搜索">
+    </ul>
+    <ul id="nav-l" class="nav-l">
+        <li>
+            <a href="login.html">用户未登录,请登陆</a>
+            <a href="register.html">注册</a>  <!-- 用户没有登陆是为注册 ，用户登录之后为退出-->
+        </li>
+    </ul>
+
+</body>
+</html>

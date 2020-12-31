@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>电影详情页面（将基于物品的协同推荐的电影放在此页面）</title>
+
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/movie.css">
+    <link rel="stylesheet" type="text/css" href="statics/layui/css/layui.css">
+
+    <script src="js/getParameter.js"></script>
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/movie.js"></script>
+    <script src="statics/layui/layui.js"></script>
+    <script src="js/footer.js"></script>
+
+    <script>
+        $(function (){
+            $("#top").load("header.html");
+            $("#footer").load("footer.html");
+
+            var moviesId = getParameter("moviesId");
+            getMovieDetail(moviesId);
+
+            //加载推荐的电影
+            getItemCFRecommenderPictures(moviesId);
+
+        })
+    </script>
+
+</head>
+<body>
+<div id="top" class="top">
+</div>
+<div class="middle">
+<!--    放图片详情-->
+    <div id="middle-de" class="middle-de">
+        <div id="middle-de-img" class="middle-de-img">
+            <img src="#">
+        </div>
+        <div class="middle-de-p">
+            <div id="middle-de-p-title" class="middle-de-p-title">片名：</div>
+            <div id="middle-de-p-genres" class="middle-de-p-genres">分类：</div>
+            <div id="middle-de-p-avg" class="middle-de-p-avg">平均分：
+                <span>
+                    <div id="middle-de-img-1" class="middle-de-img-1"><img src="image/start.png"></div>
+                    <div id="middle-de-img-2" class="middle-de-img-2"><img src="image/start_full.png"></div>
+                    <div id="middle-de-img-3" class="middle-de-img-3"><img src="image/start.png"></div>
+                    <div id="middle-de-img-4" class="middle-de-img-4"><img src="image/start_full.png"></div>
+                    <div id="middle-de-img-5" class="middle-de-img-5"><img src="image/start.png"></div>
+                    <div id="middle-de-img-6" class="middle-de-img-6"><img src="image/start_full.png"></div>
+                    <div id="middle-de-img-7" class="middle-de-img-7"><img src="image/start.png"></div>
+                    <div id="middle-de-img-8" class="middle-de-img-8"><img src="image/start_full.png"></div>
+                    <div id="middle-de-img-9" class="middle-de-img-9"><img src="image/start.png"></div>
+                    <div id="middle-de-img-10" class="middle-de-img-10"><img src="image/start_full.png"></div>
+                </span>
+                <p id="middle-de-p-avg-p" class="middle-de-p-avg-p">111111</p>
+            </div>
+            <div id="middle-de-p-writeTagAndRating" class="middle-de-p-writeTagAndRating">
+                <button id="middle-de-p-writeTagAndRating-button" class="middle-de-p-writeTagAndRating-button" onclick="writeTagAndRating()">打分评论</button>
+<!--                <div class="middle-de-p-writeTagAndRating-rdiv">打分：<div id="middle-de-p-writeTagAndRating-rating" class="middle-de-p-writeTagAndRating-rating"></div></div>-->
+<!--                <div class="middle-de-p-writeTagAndRating-tdiv">-->
+<!--                    评论：-->
+<!--                    <div id="middle-de-p-writeTagAndRating-tag" class="middle-de-p-writeTagAndRating-tag">-->
+<!--                        <input class="middle-de-p-writeTagAndRating-tag-text" type="text" placeholder="    加标点符号在内，不能超过20字！">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="middle-de-p-writeTagAndRating-bdiv"><button class="middle-de-p-writeTagAndRating-submit" onclick="getWriteTagAndRating()">提交</button></button></div>-->
+            </div>
+        </div>
+    </div>
+    <div id="middle-tag-rating" class="middle-tag-rating">
+<!--        <div class="middle-tag-rating-div">-->
+<!--            <span class="middle-tag-rating-ur">-->
+<!--                <div class="middle-tag-rating-ur-u">用户：</div>-->
+<!--                评分：<div id="middle-tag-rating-ur-r-1" class="middle-tag-rating-ur-r-1"></div>-->
+<!--                <div class="middle-tag-rating-ur-d">时间：</div>-->
+<!--            </span>-->
+<!--            <span class="middle-tag-rating-t">评论</span>-->
+<!--        </div>-->
+<!--        <div class="middle-tag-rating-div">-->
+<!--            <span class="middle-tag-rating-ur">-->
+<!--                <div class="middle-tag-rating-ur-u">用户：</div>-->
+<!--                评分：<div id="middle-tag-rating-ur-r-2" class="middle-tag-rating-ur-r-2"></div>-->
+<!--                <div class="middle-tag-rating-ur-d">时间：</div>-->
+<!--            </span>-->
+<!--            <span class="middle-tag-rating-t">评论</span>-->
+<!--        </div>-->
+        请稍等一会，该电影的用户评论稍后出现。
+    </div>
+    <div id="middle-tag-rating-b" class="middle-tag-rating-b">
+        <button id="middle-tag-rating-b-1" class="middle-tag-rating-b-1">展开</button>
+        <button id="middle-tag-rating-b-2" class="middle-tag-rating-b-2">折叠</button>
+    </div>
+
+</div>
+<div id="footer" class="footer"></div>
+</body>
+</html>

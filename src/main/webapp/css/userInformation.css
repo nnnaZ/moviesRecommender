@@ -1,0 +1,65 @@
+.middle{
+    margin-top: 30px;
+}
+.middle-buttons{
+    display: inline-block;
+    position: absolute;
+    top: 130px;
+    left: 0px;
+    width: 200px;
+    /*height: 100%;*/
+    /*border-right-style: solid;*/
+    /*background-color: darkslategray;*/
+}
+.middle-button-password{
+    display: block;
+    margin-left: 60px;
+    margin-bottom: 20px;
+    width: 120px;
+    height: 30px;
+    background-color: darkslategray;
+}
+
+.middle-button-tagAndRating{
+    display: block;
+    margin-left: 60px;
+    /*margin-bottom: 20px;*/
+    width: 120px;
+    height: 30px;
+    background-color: darkslategray;
+}
+
+.middle-text{
+    display: inline-block;
+    position: absolute;
+    top: 150px;
+    left: 260px;
+    /*padding-left: 50px;*/
+    /*background-color: blue;*/
+}
+
+.middle-text input{
+    width: 200px;
+    height: 30px;
+}
+
+.middle-text .update-button{
+    width: 50px;
+    height: 20px;
+    margin-top: 20px;
+    margin-left: 50px;
+    border: none;
+    background-color: darkslategray;
+}
+
+/*table{*/
+/*    text-align: center;*/
+/*}*/
+
+/*table tr{*/
+/*    height: 50px;*/
+/*}*/
+
+/*table td{*/
+/*    width: 200px;*/
+/*}*/
